@@ -30,7 +30,7 @@ const AdDetails = ({ onBack }) => {
         <div className="bg-white border border-gray-300 rounded-lg overflow-hidden mx-auto">
         <div className="p-6 space-y-8">
           {/* Description */}
-          <div>
+          <div className="pb-6 border-b border-gray-200">
             <label className="block text-sm font-medium text-gray-700 mb-2">Description *</label>
             <textarea
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 h-24"
@@ -45,7 +45,7 @@ const AdDetails = ({ onBack }) => {
           </div>
 
           {/* Set a Price */}
-          <div>
+          <div className="pb-6 border-b border-gray-200">
             <h3 className="font-semibold text-gray-800 mb-4">SET A PRICE</h3>
             <div className="mb-2">
               <label className="block text-sm font-medium text-gray-700 mb-2">Price</label>
@@ -62,7 +62,7 @@ const AdDetails = ({ onBack }) => {
           </div>
 
           {/* Upload Photos */}
-          <div>
+          <div className="pb-6 border-b border-gray-200">
             <h3 className="font-semibold text-gray-800 mb-4">UPLOAD UP TO 20 PHOTOS</h3>
             <div className="grid grid-cols-4 gap-2 max-w-70">
               {photoSlots.map((_, index) => (
@@ -85,7 +85,7 @@ const AdDetails = ({ onBack }) => {
           </div>
 
           {/* Confirm Location */}
-          <div>
+          <div className="pb-6 border-b border-gray-200">
             <h3 className="font-semibold text-gray-800 mb-4">CONFIRM YOUR LOCATION</h3>
 
             {/* Tabs */}
@@ -128,7 +128,7 @@ const AdDetails = ({ onBack }) => {
           </div>
 
           {/* Review Your Details */}
-          <div className="border border-gray-300 p-6">
+          <div className="pb-6">
             <h3 className="font-bold text-lg text-black mb-4">REVIEW YOUR DETAILS</h3>
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
