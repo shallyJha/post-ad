@@ -1,10 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import { Camera } from "lucide-react"
+import { Camera, ArrowLeft } from "lucide-react"
 
 // const AdDetails = ({ onNext, onBack }) => {
-const AdDetails = () => {
+const AdDetails = ({ onBack }) => {
   const [description, setDescription] = useState("")
   const [price, setPrice] = useState("")
   const [activeTab, setActiveTab] = useState("LIST")
@@ -13,10 +13,21 @@ const AdDetails = () => {
   const photoSlots = Array(20).fill(null)
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-2xl font-bold text-center mb-8">POST YOUR AD</h1>
+    <div className="min-h-screen bg-gray-50">
+      {/* Back button */}
+      <div className="bg-gray-100 p-4 w-full">
+        <div className="max-w-4xl mx-auto flex justify-start">
+          <ArrowLeft 
+            className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-800" 
+            onClick={onBack}
+          />
+        </div>
+      </div>
 
-      <div className="bg-white border border-gray-300 rounded-lg overflow-hidden">
+      <div className="max-w-4xl mx-auto p-6">
+        <h1 className="text-2xl font-bold text-center mb-8">POST YOUR AD</h1>
+
+        <div className="bg-white border border-gray-300 rounded-lg overflow-hidden mx-auto">
         <div className="p-6 space-y-8">
           {/* Description */}
           <div>
@@ -140,6 +151,7 @@ const AdDetails = () => {
             POST NOW
           </button>
         </div>
+      </div>
       </div>
     </div>
   );

@@ -1,10 +1,11 @@
 "use client"
 
 import { useState } from "react"
+import { ArrowLeft } from "lucide-react"
 
 const PropertyDetails = ({ selectedCategory, selectedSubcategory, onNext, onBack }) => {
   const [formData, setFormData] = useState({
-    type: "",
+    type: "Independent / Builder Floors", // Pre-selected as shown in image
     bhk: "",
     bathrooms: "",
     furnishing: "",
@@ -27,32 +28,45 @@ const PropertyDetails = ({ selectedCategory, selectedSubcategory, onNext, onBack
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-2xl font-bold text-center mb-8">POST YOUR AD</h1>
+    <div className="min-h-screen bg-gray-50">
+      {/* Back button */}
+      <div className="bg-gray-100 p-4 w-fulL">
+        <div className="max-w-4xl mx-auto">
+          <ArrowLeft 
+            className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-800 justify-start" 
+            onClick={onBack}
+          />
+        </div>
+      </div>
 
-      <div className="bg-white border border-gray-300 rounded-lg overflow-hidden">
+      <div className="max-w-4xl mx-auto p-6">
+        <h1 className="text-2xl font-bold text-center mb-8">POST YOUR AD</h1>
+
+        <div className="bg-white border border-gray-300 rounded-lg overflow-hidden mx-auto">
         {/* Selected Category */}
-        <div className="bg-gray-100 px-4 py-3 border-b border-gray-300">
-          <h2 className="font-semibold text-gray-800">SELECTED CATEGORY</h2>
-          <div className="text-sm text-gray-600 mt-1">
-            Properties / For Rent: Houses & Apartments /{" "}
-            <span className="text-blue-600 underline cursor-pointer">Change</span>
+        <div className="px-6 py-4 border-b border-gray-300">
+          <h2 className="font-bold text-lg text-gray-800 mb-2">SELECTED CATEGORY</h2>
+          <div className="text-sm text-gray-600">
+            Properties / For Sale: Houses & Apartments{" "}
+            <span className="text-blue-600 underline cursor-pointer ml-4">Change</span>
           </div>
         </div>
 
         {/* Include Some Details */}
-        <div className="p-6">
-          <h3 className="font-semibold text-gray-800 mb-4">INCLUDE SOME DETAILS</h3>
+        <div className="px-6 py-6">
+          <h3 className="font-bold text-lg text-gray-800 mb-6">INCLUDE SOME DETAILS</h3>
 
           {/* Type */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Type *</label>
-            <div className="flex flex-wrap gap-2">
-              {["Flat / Apartment", "Independent / Builder Floors", "Individual House / Villa"].map((type) => (
+          <div className="mb-8">
+            <label className="block text-sm font-medium text-gray-700 mb-3">Type *</label>
+            <div className="flex flex-wrap gap-3">
+              {["Flats / Apartments", "Independent / Builder Floors", "Farm House", "House & Villa"].map((type) => (
                 <button
                   key={type}
-                  className={`px-3 py-1 text-sm border rounded ${
-                    formData.type === type ? "bg-blue-100 border-blue-500" : "border-gray-300"
+                  className={`px-4 py-2 text-sm border rounded-md transition-colors ${
+                    formData.type === type
+                      ? "bg-blue-500 text-white border-blue-500"
+                      : "bg-white text-gray-700 border-gray-300 hover:border-gray-400"
                   }`}
                   onClick={() => handleInputChange("type", type)}
                 >
@@ -63,14 +77,16 @@ const PropertyDetails = ({ selectedCategory, selectedSubcategory, onNext, onBack
           </div>
 
           {/* BHK */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">BHK</label>
-            <div className="flex gap-2">
+          <div className="mb-8">
+            <label className="block text-sm font-medium text-gray-700 mb-3">BHK</label>
+            <div className="flex gap-3">
               {["1", "2", "3", "4", "4+"].map((bhk) => (
                 <button
                   key={bhk}
-                  className={`px-3 py-1 text-sm border rounded ${
-                    formData.bhk === bhk ? "bg-blue-100 border-blue-500" : "border-gray-300"
+                  className={`px-4 py-2 text-sm border rounded-md min-w-[50px] transition-colors ${
+                    formData.bhk === bhk
+                      ? "bg-blue-500 text-white border-blue-500"
+                      : "bg-white text-gray-700 border-gray-300 hover:border-gray-400"
                   }`}
                   onClick={() => handleInputChange("bhk", bhk)}
                 >
@@ -81,14 +97,16 @@ const PropertyDetails = ({ selectedCategory, selectedSubcategory, onNext, onBack
           </div>
 
           {/* Bathrooms */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Bathrooms</label>
-            <div className="flex gap-2">
+          <div className="mb-8">
+            <label className="block text-sm font-medium text-gray-700 mb-3">Bathrooms</label>
+            <div className="flex gap-3">
               {["1", "2", "3", "4", "4+"].map((bathroom) => (
                 <button
                   key={bathroom}
-                  className={`px-3 py-1 text-sm border rounded ${
-                    formData.bathrooms === bathroom ? "bg-blue-100 border-blue-500" : "border-gray-300"
+                  className={`px-4 py-2 text-sm border rounded-md min-w-[50px] transition-colors ${
+                    formData.bathrooms === bathroom
+                      ? "bg-blue-500 text-white border-blue-500"
+                      : "bg-white text-gray-700 border-gray-300 hover:border-gray-400"
                   }`}
                   onClick={() => handleInputChange("bathrooms", bathroom)}
                 >
@@ -99,14 +117,16 @@ const PropertyDetails = ({ selectedCategory, selectedSubcategory, onNext, onBack
           </div>
 
           {/* Furnishing */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Furnishing</label>
-            <div className="flex gap-2">
-              {["Furnished", "Semi-furnished", "Unfurnished"].map((furnishing) => (
+          <div className="mb-8">
+            <label className="block text-sm font-medium text-gray-700 mb-3">Furnishing</label>
+            <div className="flex gap-3">
+              {["Furnished", "Semi-Furnished", "Unfurnished"].map((furnishing) => (
                 <button
                   key={furnishing}
-                  className={`px-3 py-1 text-sm border rounded ${
-                    formData.furnishing === furnishing ? "bg-blue-100 border-blue-500" : "border-gray-300"
+                  className={`px-4 py-2 text-sm border rounded-md transition-colors ${
+                    formData.furnishing === furnishing
+                      ? "bg-blue-500 text-white border-blue-500"
+                      : "bg-white text-gray-700 border-gray-300 hover:border-gray-400"
                   }`}
                   onClick={() => handleInputChange("furnishing", furnishing)}
                 >
@@ -116,6 +136,7 @@ const PropertyDetails = ({ selectedCategory, selectedSubcategory, onNext, onBack
             </div>
           </div>
 
+          {/* Continue with rest of form fields... */}
           {/* Listed By */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-gray-700 mb-2">Listed By</label>
@@ -290,8 +311,9 @@ const PropertyDetails = ({ selectedCategory, selectedSubcategory, onNext, onBack
           </button>
         </div>
       </div>
+      </div>
     </div>
-  );
-};
+  )
+}
 
-export default PropertyDetails;
+export default PropertyDetails
