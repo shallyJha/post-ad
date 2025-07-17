@@ -351,19 +351,20 @@ const PropertyDetails = ({ onNext, onBack }) => {
             {/* Upload Photos */}
             <div className="mb-6">
               <h3 className="font-semibold text-gray-800 mb-4">UPLOAD UP TO 20 PHOTOS</h3>
-              <div className="grid grid-cols-4 gap-2 max-w-70">
+              <div className="grid grid-cols-4 gap-2 max-w-110">
                 {photoSlots.map((_, index) => (
                   <div
                     key={index}
-                    className="w-16 h-16 border-1 border-gray-600 flex items-center justify-center cursor-pointer hover:border-gray-400 transition-colors"
+                    className="border-1 border-gray-600 flex items-center justify-center cursor-pointer hover:border-gray-400 transition-colors"
+                    style={{ width: '104px', height: '104px' }}
                   >
                     {index === 0 ? (
                       <div className="text-center">
-                        <CameraIcon className="w-6 h-6 text-gray-600 mx-auto mb-1" />
-                        <div className="text-xs text-gray-600">Add Photo</div>
+                        <CameraIcon className="w-8 h-8 text-gray-600 mx-auto mb-1" />
+                        <div className="text-s text-gray-600">Add Photo</div>
                       </div>
                     ) : (
-                      <CameraIcon className="w-6 h-6 text-gray-400" />
+                      <CameraIcon className="w-8 h-8 text-gray-400" />
                     )}
                   </div>
                 ))}
