@@ -64,19 +64,19 @@ const AdDetails = ({ onBack }) => {
           {/* Upload Photos */}
           <div>
             <h3 className="font-semibold text-gray-800 mb-4">UPLOAD UP TO 20 PHOTOS</h3>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-4 gap-2 max-w-70">
               {photoSlots.map((_, index) => (
                 <div
                   key={index}
-                  className="aspect-square border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center cursor-pointer hover:border-gray-400 transition-colors"
+                  className="w-16 h-16 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center cursor-pointer hover:border-gray-400 transition-colors"
                 >
                   {index === 0 ? (
                     <div className="text-center">
-                      <Camera className="w-6 h-6 text-gray-400 mx-auto mb-1" />
+                      <Camera className="w-4 h-4 text-gray-400 mx-auto mb-1" />
                       <div className="text-xs text-gray-500">Add Photo</div>
                     </div>
                   ) : (
-                    <Camera className="w-6 h-6 text-gray-300" />
+                    <Camera className="w-4 h-4 text-gray-300" />
                   )}
                 </div>
               ))}
@@ -128,14 +128,14 @@ const AdDetails = ({ onBack }) => {
           </div>
 
           {/* Review Your Details */}
-          <div>
-            <h3 className="font-semibold text-gray-800 mb-4">REVIEW YOUR DETAILS</h3>
+          <div className="border border-gray-300 p-6">
+            <h3 className="font-bold text-lg text-black mb-4">REVIEW YOUR DETAILS</h3>
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-bold">
+              <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
                 V
               </div>
               <div>
-                <div className="font-medium">Vinit gangwar</div>
+                <div className="font-medium text-black">Vinit gangwar</div>
                 <div className="text-sm text-gray-500">Member since Mar 2023</div>
               </div>
             </div>
