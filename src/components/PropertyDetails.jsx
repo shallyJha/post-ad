@@ -24,6 +24,7 @@ const PropertyDetails = ({ onNext, onBack }) => {
   const [price, setPrice] = useState("")
   const [activeTab, setActiveTab] = useState("LIST")
   const [state, setState] = useState("")
+  const [uploadedPhotos, setUploadedPhotos] = useState([])
 
   const photoSlots = Array(20).fill(null)
 
@@ -48,6 +49,42 @@ const PropertyDetails = ({ onNext, onBack }) => {
 
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
+  }
+
+  const handleFileUpload = (event) => {
+    const files = Array.from(event.target.files)
+    
+    files.forEach(file => {
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          setUploadedPhotos(prev => {
+            if (prev.length < 20) {
+              return [...prev, {
+                id: Date.now() + Math.random(),
+                file,
+                url: e.target.result
+              }]
+            }
+            return prev
+          })
+        }
+        reader.readAsDataURL(file)
+      }
+    })
+  }
+
+  const removePhoto = (photoId) => {
+    setUploadedPhotos(prev => prev.filter(photo => photo.id !== photoId))
+  }
+
+  const handlePhotoSlotClick = () => {
+    const fileInput = document.createElement('input')
+    fileInput.type = 'file'
+    fileInput.accept = 'image/*'
+    fileInput.multiple = true
+    fileInput.onchange = handleFileUpload
+    fileInput.click()
   }
 
   return (
@@ -352,24 +389,47 @@ const PropertyDetails = ({ onNext, onBack }) => {
             <div className="mb-6">
               <h3 className="font-semibold text-gray-800 mb-4">UPLOAD UP TO 20 PHOTOS</h3>
               <div className="grid grid-cols-4 gap-2 max-w-110">
-                {photoSlots.map((_, index) => (
-                  <div
-                    key={index}
-                    className="border-1 border-gray-600 flex items-center justify-center cursor-pointer hover:border-gray-400 transition-colors"
-                    style={{ width: '104px', height: '104px' }}
-                  >
-                    {index === 0 ? (
-                      <div className="text-center">
-                        <CameraIcon className="w-8 h-8 text-gray-600 mx-auto mb-1" />
-                        <div className="text-s text-gray-600">Add Photo</div>
-                      </div>
-                    ) : (
-                      <CameraIcon className="w-8 h-8 text-gray-400" />
-                    )}
-                  </div>
-                ))}
+                {photoSlots.map((_, index) => {
+                  const uploadedPhoto = uploadedPhotos[index]
+                  
+                  return (
+                    <div
+                      key={index}
+                      className="border-1 border-gray-600 flex items-center justify-center cursor-pointer hover:border-gray-400 transition-colors relative group"
+                      style={{ width: '104px', height: '104px' }}
+                      onClick={() => !uploadedPhoto && handlePhotoSlotClick()}
+                    >
+                      {uploadedPhoto ? (
+                        <>
+                          <img 
+                            src={uploadedPhoto.url} 
+                            alt={`Upload ${index + 1}`}
+                            className="w-full h-full object-cover rounded"
+                          />
+                          <button
+                            className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              removePhoto(uploadedPhoto.id)
+                            }}
+                          >
+                            ×
+                          </button>
+                        </>
+                      ) : index === 0 ? (
+                        <div className="text-center">
+                          <CameraIcon className="w-8 h-8 text-gray-600 mx-auto mb-1" />
+                          <div className="text-s text-gray-600">Add Photo</div>
+                        </div>
+                      ) : (
+                        <CameraIcon className="w-8 h-8 text-gray-400" />
+                      )}
+                    </div>
+                  )
+                })}
               </div>
               <div className="text-xs text-orange-500 mt-2">This field is mandatory</div>
+              <div className="text-xs text-gray-500 mt-1">Click on any empty slot to upload images. You can select multiple images at once.</div>
             </div>
 
             {/* Separator */}
