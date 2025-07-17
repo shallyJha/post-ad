@@ -68,7 +68,7 @@ const AdDetails = ({ onBack }) => {
               {photoSlots.map((_, index) => (
                 <div
                   key={index}
-                  className="w-16 h-16 border-2 border-gray-300 rounded-lg flex items-center justify-center cursor-pointer hover:border-gray-400 transition-colors"
+                  className="w-16 h-16 border-1 border-gray-600 flex items-center justify-center cursor-pointer hover:border-gray-400 transition-colors"
                 >
                   {index === 0 ? (
                     <div className="text-center">
